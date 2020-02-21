@@ -60,12 +60,6 @@
 
             document.getElementById('messages').innerHTML = '';
         });
-
-        document.getElementById('send').addEventListener('click', event => {
-            event.preventDefault();
-
-            sendSocketMessage(document.getElementById('message').value);
-        });
     </script>
 </body>
 </html>
