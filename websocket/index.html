@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Connection Checker - WebSocket</title>
+    <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+    <div class="container">
+        <form>
+            <ul class="flex-outer">
+                <li>
+                    <label for="uri">URI</label>
+                    <input type="text" id="uri" placeholder="Enter WebSocket server URI">
+                </li>
+                <li>
+                    <p>Close on message received</p>
+                    <ul class="flex-inner">
+                        <li>
+                            <input type="checkbox" id="close-on-message-received" />
+                        </li>
+                    </ul>
+                </li>
+                <li class="buttons">
+                    <button type="submit" id="submit">Test</button>
+                    <button type="reset" id="reset">Clear</button>
+                </li>
+            </ul>
+        </form>
+
+        <hr class="divider" />
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Message</th>
+                </tr>
+            </thead>
+            <tbody id="messages">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        document.getElementById('submit').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const uri = document.getElementById('uri').value;
+            const closeOnMessageReceived = document.getElementById('close-on-message-received').checked;
+
+            testWebSocketConnection(uri, closeOnMessageReceived);
+        });
+
+        document.getElementById('reset').addEventListener('click', (event) => {
+            event.preventDefault();
+
+            document.getElementById('uri').value = '';
+
+            document.getElementById('messages').innerHTML = '';
+        });
+
+        document.getElementById('send').addEventListener('click', event => {
+            event.preventDefault();
+
+            sendSocketMessage(document.getElementById('message').value);
+        });
+    </script>
+</body>
+</html>
